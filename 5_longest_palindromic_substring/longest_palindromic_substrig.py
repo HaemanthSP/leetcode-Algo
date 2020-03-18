@@ -1,4 +1,5 @@
 class Solution:
+    
     def get_palindrome(self, idx, s, centered=False):
         palindrome = ''
         
@@ -9,8 +10,8 @@ class Solution:
             y = idx+1
             palindrome = s[idx]
            
-        for i in range(500):  # 500: as the max lenght is 1000
-            if s[x-i] == s[y+i] and (x-i >= 0) and (y+i < len(s)):
+        for i in range(500):  # 500: as the max length is 1000
+            if (x-i >= 0) and (y+i < len(s)) and s[x-i] == s[y+i]:
                 palindrome = s[x-i] + palindrome + s[y+i]
             else:
                 break
@@ -25,11 +26,11 @@ class Solution:
             # Detect the two type of centers of palindrome
             if s[idx-1] == s[idx]:
                 buffers.append(self.get_palindrome(idx, s))
-            elif s[idx-1] == s[idx+1]:
+            if s[idx-1] == s[idx+1]:
                 buffers.append(self.get_palindrome(idx, s, centered=True))
                 
         # Handle the border case
-        if s[-1] == s[-2]:
+        if len(s)>=2 and s[-1] == s[-2]:
             buffers.append(s[-2] + s[-1])
             
         # Find the longest
